@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#211c3b"><title>AnatoQuiz – Anatomie Kiné</title>
+<style>
+:root{--bg:#111322;--panel:#1b1d32;--panel2:#242640;--line:#383957;--ink:#f8f7ff;--muted:#b9b8d1;--purple:#9a62ff;--pink:#ff70b4;--green:#35d49b;--gold:#ffd166}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#282044,#111322 60%);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:82px}header{padding:22px 18px 24px;background:linear-gradient(125deg,#4b2c91,#713fc0 55%,#b14486);border-radius:0 0 28px 28px}header .brand{font-weight:900;font-size:23px}header h1{font-size:27px;line-height:1.1;margin:22px 0 7px}header p{color:#eee5ff;margin:0;font-size:14px}main{max-width:760px;margin:auto;padding:16px}.view{display:none}.view.active{display:block}.section{font-weight:850;font-size:19px;margin:20px 0 12px}.card{background:linear-gradient(145deg,#1c1e33,#17192b);border:1px solid var(--line);border-radius:20px;padding:16px;margin:12px 0;box-shadow:0 8px 24px #0002}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.tile{border:1px solid #494666;border-radius:17px;padding:14px;text-align:left;color:var(--ink);font:inherit;background:linear-gradient(145deg,#24243d,#1a1b2d);cursor:pointer;min-height:100px}.tile strong{display:block;margin:7px 0 3px}.tile small{color:var(--muted)}.tile .emoji{font-size:24px}.primary{width:100%;border:0;border-radius:14px;padding:14px;background:linear-gradient(100deg,#8750e7,#ad52ce);color:white;font-weight:850;margin-top:10px}.secondary{border:1px solid #555071;background:#292743;color:#d9c8ff;border-radius:12px;padding:10px;font-weight:750}.field{margin:12px 0}.field label{display:block;color:var(--muted);font-size:13px;margin-bottom:6px}.field select,.field input{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;background:#202138;color:var(--ink);font:inherit}.option{display:block;width:100%;text-align:left;padding:13px;border:1.5px solid var(--line);border-radius:13px;background:#202138;color:var(--ink);margin:7px 0}.option.good{background:#12392f;border-color:var(--green)}.option.bad{background:#421f35;border-color:var(--pink)}.feedback{background:#25213e;border:1px solid #4b3d75;border-radius:14px;padding:13px;margin-top:12px;line-height:1.45;font-size:14px}.tag{display:inline-block;background:#3a2c5e;color:#d8c5ff;border-radius:20px;padding:5px 9px;font-size:11px;font-weight:800}.muted{font-size:13px;color:var(--muted);line-height:1.5}.stat{display:flex;justify-content:space-between;color:var(--muted);font-size:13px}.diagram{display:block;width:100%;max-height:420px;background:#151729;border:1px solid #34354f;border-radius:16px;touch-action:manipulation}.hotspot{cursor:pointer;stroke:#fff;stroke-width:1.4;opacity:.78}.hotspot:hover{opacity:1;stroke:#ffd166;stroke-width:3}.nav{position:fixed;bottom:0;left:0;right:0;z-index:5;display:flex;justify-content:space-around;background:#17182bed;backdrop-filter:blur(12px);border-top:1px solid var(--line);padding:9px 4px calc(9px + env(safe-area-inset-bottom))}.nav button{border:0;background:none;color:#a9a7c5;font-size:11px;font-weight:700}.nav span{display:block;font-size:20px;margin-bottom:2px}.nav button.active{color:#c9a5ff}.back{border:0;background:none;color:#c9a5ff;font-weight:800;padding:0 0 8px}.hide{display:none!important}.note{padding:10px;background:#25213e;border-radius:12px;color:#c7c3e2;font-size:12px;line-height:1.45}
+@media(min-width:600px){.grid{grid-template-columns:repeat(3,1fr)}}
+</style></head><body>
+<header><div class="brand">🧠 Anato<span style="color:#ffd166">Quiz</span> <small style="font-size:11px">KINÉ</small></div><h1>Comprendre le corps.<br>Retenir chaque détail.</h1><p>Anatomie · Cours · QCM · Localisation interactive</p></header>
+<main>
+<section id="home" class="view active">
+<div class="section">Choisir une région anatomique</div>
+<div class="grid">
+<button class="tile" onclick="setup('head')"><span class="emoji">💀</span><strong>Tête et cou</strong><small>Crâne, face, cervical</small></button>
+<button class="tile" onclick="setup('upper')"><span class="emoji">🦴</span><strong>Membre supérieur</strong><small>Épaule, bras, avant-bras, main</small></button>
+<button class="tile" onclick="setup('trunk')"><span class="emoji">🫁</span><strong>Tronc</strong><small>Rachis, thorax, abdomen</small></button>
+<button class="tile" onclick="setup('pelvis')"><span class="emoji">🦵</span><strong>Bassin & hanche</strong><small>Os coxal, sacrum, muscles</small></button>
+<button class="tile" onclick="setup('lower')"><span class="emoji">🦿</span><strong>Membre inférieur</strong><small>Hanche à pied</small></button>
+<button class="tile" onclick="setup('foot')"><span class="emoji">🦶</span><strong>Pied & cheville</strong><small>Tarse, métatarsiens, phalanges</small></button>
+<button class="tile" onclick="setup('all')" style="grid-column:1/-1"><span class="emoji">🧍</span><strong>Corps entier</strong><small>Quiz transversal sur toutes les régions</small></button>
+</div>
+<div class="section">Réviser à ma façon</div><div class="card"><p class="muted">Choisis une région, un thème et un format. Les quiz de localisation te demandent de toucher directement la structure sur une illustration anatomique. Les réponses sont corrigées immédiatement.</p><button class="primary" onclick="setup('all')">Créer un quiz personnalisé →</button></div>
+<div class="card"><b>🔔 Rappels de révision</b><p class="muted">Configure tes jours et ton heure de révision.</p><button class="secondary" onclick="show('reminders')">Mes rappels</button></div>
+</section>
+<section id="setup" class="view"><button class="back" onclick="show('home')">← Accueil</button><div class="section">Créer mon quiz</div><div class="card">
+<div class="field"><label>Région</label><select id="region"><option value="head">Tête et cou</option><option value="upper">Membre supérieur</option><option value="trunk">Tronc</option><option value="pelvis">Bassin et hanche</option><option value="lower">Membre inférieur</option><option value="foot">Pied et cheville</option><option value="all">Corps entier</option></select></div>
+<div class="field"><label>Thème anatomique</label><select id="theme"><option value="bone">Os / ostéologie</option><option value="muscle">Muscles / myologie</option><option value="joint">Articulations / ligaments</option><option value="nerve">Nerfs</option><option value="mix">Mixte</option></select></div>
+<div class="field"><label>Mode</label><select id="mode"><option value="qcm">QCM avec correction immédiate</option><option value="loc">Localisation sur illustration</option><option value="mix">Mixte</option></select></div>
+<div class="field"><label>Nombre de questions</label><select id="count"><option>5</option><option>10</option><option>20</option><option>30</option></select></div>
+<button class="primary" onclick="launch()">Lancer le quiz →</button></div></section>
+<section id="quiz" class="view"><button class="back" onclick="show('setup')">← Modifier</button><div class="stat"><b id="qtype">Quiz</b><span id="counter">1/5</span></div><div class="card"><h3 id="prompt"></h3><div id="area"></div><div id="feedback"></div><button id="next" class="primary hide" onclick="next()">Question suivante →</button></div></section>
+<section id="reminders" class="view"><button class="back" onclick="show('home')">← Accueil</button><div class="section">🔔 Rappels de révision</div><div class="card"><div class="field"><label>Heure</label><input id="time" type="time" value="19:00"></div><div class="field"><label>Rythme</label><select id="freq"><option>Chaque jour</option><option>Un jour sur deux</option><option>Chaque semaine</option></select></div><button class="primary" onclick="saveReminder()">Enregistrer</button><p id="remmsg" class="muted"></p><p class="note">Les rappels enregistrés sont conservés sur cet appareil. Les notifications iPhone en arrière-plan nécessitent l’installation Web depuis Safari et l’autorisation système.</p></div></section>
+</main><nav class="nav"><button class="active" onclick="show('home')"><span>🏠</span>Accueil</button><button onclick="setup('all')"><span>📚</span>Quiz</button><button onclick="show('reminders')"><span>🔔</span>Rappels</button></nav>
+<script>
+const Q={
+head:[
+{theme:'bone',q:"Quel os forme la majeure partie du front ?",opts:["Os frontal","Os occipital","Os temporal","Os zygomatique"],a:0,exp:"L’os frontal forme le front et une partie du toit des orbites."},
+{theme:'bone',q:"Sur le schéma, touche l’os mandibulaire.",loc:'mandible',region:'head',exp:"La mandibule forme la mâchoire inférieure et porte les dents inférieures."},
+{theme:'muscle',q:"Quel muscle élève la mandibule lors de la fermeture de la bouche ?",opts:["Masséter","Digastrique","Platysma","Buccinateur"],a:0,exp:"Le masséter est un puissant élévateur de la mandibule."}],
+upper:[
+{theme:'bone',q:"Sur le schéma, touche l’humérus.",loc:'humerus',region:'upper',exp:"L’humérus est l’os du bras, entre l’épaule et le coude."},
+{theme:'bone',q:"Quel os de l’avant-bras est latéral en position anatomique ?",opts:["Radius","Ulna","Scaphoïde","Humérus"],a:0,exp:"Le radius est latéral, du côté du pouce, en position anatomique."},
+{theme:'muscle',q:"Quel muscle initie principalement les premiers degrés d’abduction de l’épaule ?",opts:["Supra-épineux","Grand pectoral","Grand dorsal","Subscapulaire"],a:0,exp:"Le supra-épineux participe à l’initiation de l’abduction gléno-humérale."}],
+trunk:[
+{theme:'bone',q:"Sur le schéma, touche une vertèbre thoracique.",loc:'thoracic',region:'trunk',exp:"Les vertèbres thoraciques s’articulent avec les côtes."},
+{theme:'bone',q:"Combien de paires de côtes possède normalement l’humain ?",opts:["12","10","11","13"],a:0,exp:"Il existe normalement 12 paires de côtes."},
+{theme:'muscle',q:"Quel muscle est le principal moteur de l’inspiration calme ?",opts:["Diaphragme","Transverse de l’abdomen","Grand droit","Carré des lombes"],a:0,exp:"La contraction du diaphragme augmente le volume thoracique."}],
+pelvis:[
+{theme:'bone',q:"Sur le schéma, touche l’os coxal.",loc:'coxal',region:'pelvis',exp:"L’os coxal est constitué de l’ilium, de l’ischion et du pubis."},
+{theme:'bone',q:"Quelle ligne glutéale sépare les zones d’origine du moyen et du petit glutéal ?",opts:["Ligne glutéale antérieure","Ligne glutéale postérieure","Ligne glutéale inférieure","Ligne arquée"],a:0,exp:"La ligne glutéale antérieure sépare les zones d’origine du moyen et du petit glutéal."},
+{theme:'muscle',q:"Quel muscle prend origine dans la fosse iliaque ?",opts:["Iliaque","Moyen glutéal","Piriforme","Obturateur externe"],a:0,exp:"L’iliaque s’unit au psoas majeur pour former l’ilio-psoas."}],
+lower:[
+{theme:'bone',q:"Sur le schéma, touche le fémur.",loc:'femur',region:'lower',exp:"Le fémur est l’os de la cuisse, entre hanche et genou."},
+{theme:'bone',q:"Quel os forme la partie latérale de la jambe ?",opts:["Fibula","Tibia","Patella","Talus"],a:0,exp:"La fibula est latérale et ne participe pas directement à l’articulation du genou."},
+{theme:'muscle',q:"Quel muscle est le principal extenseur du genou ?",opts:["Quadriceps fémoral","Biceps fémoral","Semi-tendineux","Gastrocnémien"],a:0,exp:"Le quadriceps fémoral étend le genou via le tendon quadricipital et le ligament patellaire."}],
+foot:[
+{theme:'bone',q:"Sur l’illustration, touche le calcanéus.",loc:'calc',region:'foot',exp:"Le calcanéus forme le talon, en arrière et en dessous du talus."},
+{theme:'bone',q:"Sur l’illustration, touche le naviculaire.",loc:'nav',region:'foot',exp:"Le naviculaire est en avant du talus et en arrière des cunéiformes."},
+{theme:'bone',q:"Quel os du tarse est situé sous le tibia et s’articule avec lui ?",opts:["Talus","Naviculaire","Cuboïde","Cunéiforme médial"],a:0,exp:"Le talus reçoit la mortaise tibio-fibulaire."},
+{theme:'muscle',q:"Quel tendon s’insère sur la tubérosité du naviculaire ?",opts:["Tibial postérieur","Tibial antérieur","Long fibulaire","Achille"],a:0,exp:"Le tibial postérieur s’insère notamment sur la tubérosité naviculaire et les os voisins."}],
+};
+const mixQuestions=[...Q.head,...Q.upper,...Q.trunk,...Q.pelvis,...Q.lower,...Q.foot];
+let pool=[],i=0,score=0,done=false;
+function show(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach((b,j)=>b.classList.toggle('active',id==='home'?j===0:id==='reminders'?j===2:j===1));}
+function setup(r){show('setup');document.getElementById('region').value=r;}
+function launch(){let r=document.getElementById('region').value,t=document.getElementById('theme').value,m=document.getElementById('mode').value,n=+document.getElementById('count').value;let src=r==='all'?mixQuestions:(Q[r]||[]);pool=src.filter(q=>(t==='mix'||q.theme===t)&&(m==='mix'||(m==='loc'?!!q.loc:!q.loc)));if(!pool.length){alert("Aucune question de ce type dans cette région dans cette version. Essaie « Mixte » ou une autre région.");return;}pool=pool.slice(0,n);i=0;score=0;show('quiz');render();}
+function render(){done=false;let q=pool[i];document.getElementById('counter').textContent=(i+1)+'/'+pool.length;document.getElementById('qtype').textContent=q.loc?'📍 Localisation':'❓ QCM';document.getElementById('prompt').textContent=q.q;document.getElementById('area').innerHTML='';document.getElementById('feedback').innerHTML='';document.getElementById('next').classList.add('hide');if(q.loc){document.getElementById('area').innerHTML=diagram(q.region);document.querySelectorAll('[data-id]').forEach(el=>el.onclick=()=>locAnswer(el.dataset.id));}else{q.opts.forEach((o,j)=>{let b=document.createElement('button');b.className='option';b.textContent=String.fromCharCode(65+j)+'. '+o;b.onclick=()=>answer(j,b);document.getElementById('area').appendChild(b)});}}
+function diagram(region){if(region==='foot')return footSvg();return bodySvg(region);}
+function bodySvg(r){let target=pool[i].loc;return `<svg class="diagram" viewBox="0 0 320 390" aria-label="Illustration anatomique simplifiée avec zones cliquables">
+<defs><linearGradient id="skin" x2="0" y2="1"><stop stop-color="#e9c7a5"/><stop offset="1" stop-color="#b98672"/></linearGradient></defs>
+<!-- stylized anatomical body silhouette, organic contour --> 
+<g fill="url(#skin)" stroke="#7d5d5c" stroke-width="1.6">
+<ellipse cx="160" cy="34" rx="24" ry="29"/><path d="M146 60 Q130 65 124 82 L112 126 Q107 144 119 151 L131 137 L141 98 L144 157 Q160 170 176 157 L179 98 L189 137 L201 151 Q213 144 208 126 L196 82 Q190 65 174 60Z"/>
+<path d="M143 154 Q126 164 130 195 L140 235 L150 236 L157 190 L163 190 L170 236 L180 235 L190 195 Q194 164 177 154Z"/>
+<path d="M130 84 Q111 83 105 104 L83 164 Q79 177 91 183 Q101 185 106 171 L129 119Z"/>
+<path d="M190 84 Q209 83 215 104 L237 164 Q241 177 229 183 Q219 185 214 171 L191 119Z"/>
+<path d="M141 235 L128 310 Q126 325 138 327 L150 325 L160 258 L170 325 L182 327 Q194 325 192 310 L179 235Z"/>
+<path d="M138 327 L132 373 Q132 382 145 382 L157 381 L160 335 L163 381 L175 382 Q188 382 188 373 L182 327Z"/>
+</g>
+<g fill="#e7d4b7" stroke="#8c775f" stroke-width="1.3" opacity=".96">
+<path d="M148 66 L160 78 L172 66 L170 151 L160 162 L150 151Z"/><path d="M137 164 Q160 153 183 164 L177 189 L143 189Z"/><path d="M144 194 L156 194 L150 232 L140 232Z"/><path d="M164 194 L176 194 L180 232 L170 232Z"/><path d="M139 240 L151 240 L148 310 L136 310Z"/><path d="M169 240 L181 240 L184 310 L172 310Z"/>
+</g>
+<g fill="#9b65ff" stroke="#fff" stroke-width="1.5" opacity=".85">
+<circle class="hotspot" data-id="head" cx="160" cy="34" r="22"/><ellipse class="hotspot" data-id="humerus" cx="116" cy="117" rx="13" ry="43"/><ellipse class="hotspot" data-id="humerus" cx="204" cy="117" rx="13" ry="43"/><ellipse class="hotspot" data-id="thoracic" cx="160" cy="112" rx="16" ry="34"/><ellipse class="hotspot" data-id="coxal" cx="160" cy="174" rx="29" ry="23"/><ellipse class="hotspot" data-id="femur" cx="143" cy="269" rx="11" ry="42"/><ellipse class="hotspot" data-id="femur" cx="177" cy="269" rx="11" ry="42"/>
+</g><text x="12" y="20" fill="#d8d5ed" font-size="12">Schéma corporel interactif</text><text x="12" y="386" fill="#b9b8d1" font-size="10">Illustration pédagogique simplifiée · non à l’échelle</text></svg>`;}
+function footSvg(){return `<svg class="diagram" viewBox="0 0 360 300" aria-label="Illustration anatomique simplifiée du squelette du pied">
+<defs><linearGradient id="bone" x2="0" y2="1"><stop stop-color="#f6e6c9"/><stop offset="1" stop-color="#c6a77d"/></linearGradient></defs>
+<g fill="url(#bone)" stroke="#8e7556" stroke-width="2" stroke-linejoin="round">
+<!-- lateral foot outline and tarsal bones, toe direction left --> 
+<path d="M284 35 Q305 42 309 65 L304 102 Q300 120 285 129 L270 113 L271 76Z"/>
+<path d="M232 76 Q250 59 278 73 Q291 86 286 111 Q278 130 253 132 L232 119 Q220 101 232 76Z"/>
+<path d="M199 102 Q221 88 241 105 L250 129 Q244 151 220 155 L198 140 Q187 120 199 102Z"/>
+<path d="M244 129 Q263 120 280 136 L283 157 Q271 175 249 169 L237 151Z"/>
+<path d="M190 139 Q210 130 226 147 L226 166 Q214 181 195 174 L184 158Z"/>
+<path d="M224 158 Q244 148 256 165 L253 185 Q236 196 220 183Z"/>
+<!-- metatarsals tapered elongated bones --> 
+<path d="M185 164 Q194 158 201 166 L164 204 Q158 208 153 202Z"/>
+<path d="M203 174 Q212 168 218 177 L177 218 Q171 221 166 215Z"/>
+<path d="M222 184 Q230 179 236 188 L191 230 Q185 233 181 227Z"/>
+<path d="M242 188 Q250 184 255 192 L212 238 Q206 241 202 235Z"/>
+<path d="M261 180 Q270 177 274 185 L236 244 Q230 247 226 241Z"/>
+<!-- phalanges --> 
+<path d="M153 202 L129 223 Q124 228 130 233 L137 234 L166 208Z"/><path d="M166 215 L143 239 Q139 244 145 248 L152 248 L180 221Z"/>
+<path d="M181 227 L162 250 Q158 255 164 259 L170 258 L195 233Z"/><path d="M202 235 L186 257 Q182 262 188 265 L194 264 L216 241Z"/><path d="M226 241 L213 262 Q210 267 216 270 L221 268 L240 247Z"/>
+<!-- joints lines -->
+</g>
+<g fill="#a16aff" stroke="#fff" stroke-width="1.5" opacity=".9">
+<ellipse class="hotspot" data-id="talus" cx="260" cy="99" rx="23" ry="20"/>
+<ellipse class="hotspot" data-id="calc" cx="293" cy="118" rx="21" ry="26"/>
+<ellipse class="hotspot" data-id="nav" cx="222" cy="137" rx="17" ry="16"/>
+<ellipse class="hotspot" data-id="cub" cx="263" cy="151" rx="17" ry="16"/>
+<ellipse class="hotspot" data-id="cune" cx="203" cy="166" rx="17" ry="14"/>
+<ellipse class="hotspot" data-id="meta" cx="183" cy="205" rx="24" ry="18"/>
+</g><text x="12" y="18" fill="#d8d5ed" font-size="12">Pied · vue dorsale simplifiée</text><text x="12" y="288" fill="#b9b8d1" font-size="10">Illustration pédagogique · proportions schématiques</text></svg>`;}
+function answer(j,b){if(done)return;done=true;let q=pool[i],ok=j===q.a;if(ok)score++;document.querySelectorAll('.option').forEach((x,k)=>{x.disabled=true;if(k===q.a)x.classList.add('good')});if(!ok)b.classList.add('bad');document.getElementById('feedback').innerHTML=`<div class="feedback"><b>${ok?'✅ Exact !':'💡 Réponse : '+q.opts[q.a]}</b><br>${q.exp}</div>`;document.getElementById('next').classList.remove('hide');}
+function locAnswer(id){if(done)return;done=true;let q=pool[i],ok=id===q.loc;if(ok)score++;document.querySelectorAll('[data-id]').forEach(el=>{el.style.fill=el.dataset.id===q.loc?'#35d49b':el.dataset.id===id?'#ff70b4':'#9a62ff';el.style.pointerEvents='none'});document.getElementById('feedback').innerHTML=`<div class="feedback"><b>${ok?'✅ Exact !':'💡 Repère correct indiqué en vert.'}</b><br>${q.exp}</div>`;document.getElementById('next').classList.remove('hide');}
+function next(){i++;if(i>=pool.length){document.getElementById('prompt').textContent=`Quiz terminé : ${score}/${pool.length}`;document.getElementById('area').innerHTML='<p class="muted">Choisis une autre région ou un autre thème pour continuer.</p>';document.getElementById('feedback').innerHTML='';document.getElementById('next').classList.add('hide');return;}render();}
+function saveReminder(){let v=document.getElementById('time').value,f=document.getElementById('freq').value;localStorage.setItem('anatoReminder',JSON.stringify({time:v,freq:f}));document.getElementById('remmsg').textContent=`Rappel enregistré : ${f.toLowerCase()} à ${v}.`;}
+</script></body></html>
